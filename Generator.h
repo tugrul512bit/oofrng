@@ -286,7 +286,7 @@ namespace oofrng
 		void rndL(uint32_t * const __restrict__ seed, float * const __restrict__ out, const float limit)
 		{
 
-			const float mult = alignedSeedBuf->multiplier;
+			const float mult = alignedSeedBuf->multiplier*limit;
 			for(int i=0;i<LANES;i+=2)
 			{
 
@@ -309,8 +309,8 @@ namespace oofrng
 			   const uint32_t sd6 = sd5 ^ (sd5 >> 15);
 			   const uint32_t sd6_ = sd5_ ^ (sd5_ >> 15);
 
-			   const float sd7 = sd6*mult*limit;
-			   const float sd7_ = sd6_*mult*limit;
+			   const float sd7 = sd6*mult;
+			   const float sd7_ = sd6_*mult;
 
 			   out[i]=sd7;
 			   out[i+1]=sd7_;
