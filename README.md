@@ -10,5 +10,7 @@ oofrng::Generator<64> gen;
 
 alignas(4096)
 uint32_t r[n];
-gen.generate(r,n); // 3409 nanoseconds to fill n-element array with random numbers (or 4.8 Giga-integers per second)
+
+// 3409 nanoseconds to fill n-element array with random numbers (or 4.8 Giga-integers per second, on Xeon Gold 5215)
+gen.generate(r,n); 
 ```
