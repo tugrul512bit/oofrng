@@ -33,9 +33,12 @@ oofrng::Generator<64> gen;
 
 // to help compiler use aligned vector instructions
 alignas(4096)
-uint32_t r[n];
+uint32_t r[n]; // float is supported too
 
 // 3409 nanoseconds to fill n-element array with random numbers 
 // (or 4.8 Giga-integers per second, on Xeon Gold 5215)
 gen.generate(r,n); 
+
+// fill n elements again, but with upper limit (not inclusive)
+gen.generate(r,n,3.14f);
 ```
