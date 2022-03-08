@@ -20,6 +20,10 @@ Thomas Wang's random number generation function implicitly parallelized &amp; pi
 - 1.12 cycles per 32bit float for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
 - 3 cycles per 32bit float for Fx8150 (1core/1module, AVX)
 
+## float between [0 and k)
+- 1.3 cycles per 32bit float for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
+- 3 cycles per 32bit float for Fx8150 (1core/1module, AVX)
+
 ```C++
 constexpr int n = 1024*16;
 
