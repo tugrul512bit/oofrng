@@ -2,11 +2,12 @@
 Thomas Wang's random number generation function implicitly parallelized &amp; pipelined at speed of:
 
 ## uint32_t between 0 and max(4B)
-- 0.6 cycles per 32bit integer for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
-- - 0.53 cycles/integer if  ```-O3 -march=native -mavx512f  -ffast-math -fno-math-errno ``` compiler flags used
+- 0.53 cycles per 32bit integer for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
+- - (with ```-O3 -march=native -mavx512f  -ffast-math -fno-math-errno ``` compiler flags used)
 - 1.28 cycles per 32bit integer for Fx8150 (1 core/1 module, AVX)
 
 ## float between 0 and 1
+- 1.12 cycles per 32bit float for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
 - 3 cycles per 32bit float for Fx8150 (1core/1module, AVX)
 
 ```C++
