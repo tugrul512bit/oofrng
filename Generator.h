@@ -156,6 +156,7 @@ namespace oofrng
 
 			for(int i=0;i<LANES;i+=2)
 			{
+			   const float mult = alignedSeedBuf->multiplier;
 			   const uint32_t sd = seed[i];
 			   const uint32_t sd_ = seed[i+1];
 
@@ -174,8 +175,8 @@ namespace oofrng
 			   const uint32_t sd6 = sd5 ^ (sd5 >> 15);
 			   const uint32_t sd6_ = sd5_ ^ (sd5_ >> 15);
 
-			   const float sd7 = sd6*alignedSeedBuf->multiplier;
-			   const float sd7_ = sd6_*alignedSeedBuf->multiplier;
+			   const float sd7 = sd6*mult;
+			   const float sd7_ = sd6_*mult;
 
 			   out[i]=sd7;
 			   out[i+1]=sd7_;
