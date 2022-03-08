@@ -6,11 +6,16 @@ Thomas Wang's random number generation function implicitly parallelized &amp; pi
 
 ```C++
 constexpr int n = 1024*16;
+
+// 64 is the internal width of vectorization 
+// (can be set to power of 2 greater than or equal to 2)
 oofrng::Generator<64> gen;
 
+// to help compiler use aligned vector instructions
 alignas(4096)
 uint32_t r[n];
 
-// 3409 nanoseconds to fill n-element array with random numbers (or 4.8 Giga-integers per second, on Xeon Gold 5215)
+// 3409 nanoseconds to fill n-element array with random numbers 
+// (or 4.8 Giga-integers per second, on Xeon Gold 5215)
 gen.generate(r,n); 
 ```
