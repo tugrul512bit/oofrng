@@ -9,7 +9,8 @@
 #define GENERATOR_H_
 
 template < int LANES = 64 >
-    class Generator {
+    class Generator 
+    {
         public:
             Generator(): seed(LANES) 
             {
@@ -24,7 +25,8 @@ template < int LANES = 64 >
                 }
             }
 
-        const uint32_t generate1() {
+        const uint32_t generate1() 
+        {
             return rnd(seed);
         }
 
