@@ -8,28 +8,25 @@
 #ifndef GENERATOR_H_
 #define GENERATOR_H_
 
+#include<memory>
+
 namespace oofrng
 {
+
+
 
 	template<int LANES=64>
 	class Generator
 	{
 	public:
-		Generator():seed(LANES)
+		Generator()
 		{
-			ptrL = &seedL[0];
-
-			while(((size_t)ptrL)%4096 != 0)
-				ptrL++;
-			for(size_t i=0;i<LANES;i++)
-			{
-				ptrL[i]=i;
-			}
+			alignedSeedBuf = std::make_shared<AlignedSeedBuffer>();
 		}
 
 		const uint32_t generate1()
 		{
-			return rnd(seed);
+			return rnd(alignedSeedBuf->seed);
 		}
 
 		void generate(uint32_t * const __restrict__ out, const size_t n)
@@ -38,19 +35,47 @@ namespace oofrng
 			const size_t nL = n-n%LANES;
 			for(size_t i=0;i<nL;i+=LANES)
 			{
-				rndL(ptrL,out+i);
+				rndL(alignedSeedBuf->ptrL,out+i);
 			}
 
 			for(size_t i=nL;i<n;i++)
 			{
-				out[i]=rnd(seed);
+				out[i]=rnd(alignedSeedBuf->seed);
 			}
 		}
 
 	private:
-		uint32_t* ptrL;
-    	uint32_t seedL[LANES+4096];
-    	uint32_t seed;
+
+		static uint32_t* computeAlignment(uint32_t* ptr)
+		{
+			uint32_t* ptrLTmp = ptr;
+
+			while(((size_t)ptrLTmp)%4096 != 0)
+			{
+				ptrLTmp++;
+			}
+			return ptrLTmp;
+		}
+
+
+		class AlignedSeedBuffer
+		{
+		public:
+			AlignedSeedBuffer():ptrL(computeAlignment(seedL))
+			{
+				for(size_t i=0;i<LANES;i++)
+				{
+					ptrL[i]=i;
+				}
+				seed=LANES;
+			}
+
+			uint32_t seedL[LANES+4096];
+			uint32_t seed;
+			uint32_t* const __restrict__ ptrL;
+		};
+
+		std::shared_ptr<AlignedSeedBuffer> alignedSeedBuf;
 		const uint32_t rnd(uint32_t& seed)
 		{
 			// Thomas Wang's invention
