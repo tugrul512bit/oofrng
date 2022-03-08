@@ -1,8 +1,8 @@
 # oofrng
 Thomas Wang's random number generation function implicitly parallelized &amp; pipelined at speed of:
 
-- 0.7 cycles per 32bit integer for Xeon Gold 5215 2.5GHz (AVX512).
-- 1.28 cycles per 32bit integer for Fx8150 (AVX)
+- 0.6 cycles per 32bit integer for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
+- 1.28 cycles per 32bit integer for Fx8150 (1 core/1 module, AVX)
 
 ```C++
 constexpr int n = 1024*16;
