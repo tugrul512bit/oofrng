@@ -6,10 +6,15 @@ Thomas Wang's random number generation function implicitly parallelized &amp; pi
 - - (with ```-O3 -march=native -mavx512f  -ffast-math -fno-math-errno ``` compiler flags used)
 - 1.28 cycles per 32bit integer for Fx8150 (1 core/1 module, AVX)
 
-## uint32_t between [0 and parameter)
+## uint32_t between [0 and non-2^k)
 - 2.1 cycles per 32bit integer for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
 - - (with ```-O3 -march=native -mavx512f  -ffast-math -fno-math-errno ``` compiler flags used)
 - 4.5 cycles per 32bit integer for Fx8150 (1 core/1 module, AVX)
+
+## uint32_t between [0 and 2^k)
+- 0.76 cycles per 32bit integer for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
+- - (with ```-O3 -march=native -mavx512f  -ffast-math -fno-math-errno ``` compiler flags used)
+- 1.8 cycles per 32bit integer for Fx8150 (1 core/1 module, AVX)
 
 ## float between [0 and 1)
 - 1.12 cycles per 32bit float for Xeon Gold 5215 2.5GHz (1 thread, AVX512).
