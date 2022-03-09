@@ -130,9 +130,9 @@ namespace oofrng
 			{
 				for(size_t i=0;i<LANES;i++)
 				{
-					ptrL[i]=i*1000;
+					ptrL[i]=i*1003;
 				}
-				seed=LANES*1000;
+				seed=LANES*1003;
 			}
 
 
